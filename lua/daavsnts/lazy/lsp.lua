@@ -31,9 +31,9 @@ return {
         "cssls",
         "volar",
         "intelephense",
-        "ts_ls",
         "html",
-        "jsonls"
+        "jsonls",
+        "ts_ls"
       },
       handlers = {
         function(server_name) -- default handler (optional)
@@ -55,6 +55,15 @@ return {
               }
             }
           }
+        end,
+
+        ["ts_ls"] = function()
+          require('lspconfig').ts_ls.setup({
+            --single_file_support = false,
+            on_attach = function(client, bufnr)
+              --print('hello ts_ls')
+            end
+          })
         end,
       }
     })
