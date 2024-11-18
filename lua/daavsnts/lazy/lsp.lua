@@ -32,9 +32,9 @@ return {
         --"volar",
         "intelephense",
         "html",
+        "biome",
         --"jsonls",
-        --"ts_ls",
-        "biome"
+        --"ts_ls"
       },
       handlers = {
         function(server_name) -- default handler (optional)
@@ -59,6 +59,7 @@ return {
         end,
 
         --[[ ["ts_ls"] = function()
+        ["ts_ls"] = function()
           require('lspconfig').ts_ls.setup({
             --single_file_support = false,
             on_attach = function(client, bufnr)
