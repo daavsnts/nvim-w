@@ -23,7 +23,7 @@ vim.keymap.set("n", "<leader><leader>", function()
   vim.cmd("so")
 end)
 
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+--vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
 vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
 vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)

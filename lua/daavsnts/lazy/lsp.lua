@@ -28,12 +28,13 @@ return {
     require("mason-lspconfig").setup({
       ensure_installed = {
         "lua_ls",
-        "cssls",
-        "volar",
+        --"cssls",
+        --"volar",
         "intelephense",
-        "ts_ls",
         "html",
-        "jsonls"
+        --"jsonls",
+        --"ts_ls",
+        "biome"
       },
       handlers = {
         function(server_name) -- default handler (optional)
@@ -55,6 +56,31 @@ return {
               }
             }
           }
+        end,
+
+        --[[ ["ts_ls"] = function()
+          require('lspconfig').ts_ls.setup({
+            --single_file_support = false,
+            on_attach = function(client, bufnr)
+              --print('hello ts_ls')
+            end
+          })
+        end, ]] --
+
+        ["biome"] = function()
+          require("lspconfig").biome.setup({
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+              -- Deixa o Biome como responsável pela formatação
+              client.server_capabilities.documentFormattingProvider = true
+              client.server_capabilities.documentRangeFormattingProvider = true
+
+              -- Mapeia um comando para formatar manualmente com o Biome
+              vim.keymap.set("n", "<leader>f", function()
+                vim.lsp.buf.format({ async = true })
+              end, { buffer = bufnr, desc = "Format code with Biome" })
+            end,
+          })
         end,
       }
     })
